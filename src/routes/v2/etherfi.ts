@@ -104,8 +104,8 @@ const getBalances = async (chain: ChainId, symbols: string[], blockNumber: bigin
         address: b.investorPosition.investor.investor_address,
         vault_id: b.investorPosition.vault.vaultId,
         effective_balance: BigInt(b.effective_balance),
-        updated_at_block: b.lastUpdateBlock,
-        updated_at_timestamp: b.lastUpdateTimestamp,
+        updated_at_block: BigInt(b.lastUpdateBlock),
+        updated_at_timestamp: BigInt(b.lastUpdateTimestamp),
       }))
     )
     .filter(b => b.effective_balance > 0);
@@ -133,7 +133,7 @@ const getBalances = async (chain: ChainId, symbols: string[], blockNumber: bigin
   const result = Object.entries(balancesAgg).map(([address, agg]) => ({ address, ...agg }));
   const minBlock = balances.reduce(
     (acc, b) =>
-      b.updated_at_block < acc
+      b.updated_at_block < acc.number
         ? { number: b.updated_at_block, timestamp: b.updated_at_timestamp }
         : acc,
     { number: balances[0].updated_at_block, timestamp: balances[0].updated_at_timestamp }
