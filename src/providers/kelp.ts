@@ -6,14 +6,13 @@ import { BaseProvider } from './base';
 import type { PlatformBalance } from '../platforms/types';
 
 const chainToToken: Partial<Record<ChainId, Address>> = {
-  ethereum: '0xbf5495Efe5DB9ce00f80364C8B423567e58d2110',
-  arbitrum: '0x2416092f143378750bb29b79eD961ab195CcEea5',
-  linea: '0x2416092f143378750bb29b79eD961ab195CcEea5',
-  base: '0x2416092f143378750bb29b79eD961ab195CcEea5',
+  optimism: '0x87eEE96D50Fb761AD85B1c982d28A042169d61b1',
+  arbitrum: '0x4186BFC76E2E237523CBC30FD220FE055156b41F',
+  base: '0xEDfa23602D0EC14714057867A78d01e94176BEA0',
 };
 
-class RenzoProvider extends BaseProvider implements IProvider {
-  private readonly ezETH: Address;
+class KelpProvider extends BaseProvider implements IProvider {
+  private readonly rsETH: Address;
 
   constructor(
     chainId: ChainId,
@@ -22,22 +21,22 @@ class RenzoProvider extends BaseProvider implements IProvider {
     vaults: Vault[],
     users: Address[]
   ) {
-    super('renzo', ['ezETH'], chainId, publicClient, block, vaults, users);
+    super('renzo', ['wrsETH', 'rsETH'], chainId, publicClient, block, vaults, users);
 
     const token = chainToToken[chainId];
     if (!token) {
       throw new Error(`${chainId} is not supported by ${this.id} provider`);
     }
-    this.ezETH = token;
+    this.rsETH = token;
   }
 
   protected get token(): Address {
-    return this.ezETH;
+    return this.rsETH;
   }
 
   protected filterPlatformBalance(balance: PlatformBalance): boolean {
-    return balance.token === this.ezETH && balance.balance > 0;
+    return balance.token === this.rsETH && balance.balance > 0;
   }
 }
 
-export const Renzo = RenzoProvider satisfies IProviderConstructor<RenzoProvider>;
+export const Kelp = KelpProvider satisfies IProviderConstructor<KelpProvider>;

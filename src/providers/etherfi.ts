@@ -10,6 +10,8 @@ import type { PlatformBalance } from '../platforms/types';
 const chainToWrapped: Partial<Record<ChainId, Address>> = {
   ethereum: '0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee',
   arbitrum: '0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe',
+  linea: '0x1Bf74C010E6320bab11e2e5A532b5AC15e0b8aA6',
+  base: '0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A',
 };
 
 class EtherFiProvider extends BaseProvider implements IProvider {
@@ -22,7 +24,7 @@ class EtherFiProvider extends BaseProvider implements IProvider {
     vaults: Vault[],
     users: Address[]
   ) {
-    super('etherfi', ['weETH'], chainId, publicClient, block, vaults, users);
+    super('etherfi', ['weETH', 'eETH'], chainId, publicClient, block, vaults, users);
 
     const wrapped = chainToWrapped[chainId];
     if (!wrapped) {
