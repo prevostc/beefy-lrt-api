@@ -3,7 +3,10 @@ import type { ChainId } from './chains';
 // OwnershipTransferred(address,address)
 // 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0
 
-// Note should be later of vault/strategy init block
+/**
+ * Note should be later of vault/strategy init block
+ * @deprecated
+ */
 export const vaultInitBlockByChain: Record<ChainId, Record<string, bigint>> = {
   ethereum: {
     'curve-veth': 19267100n, // 19267097n,
@@ -26,4 +29,5 @@ export const vaultInitBlockByChain: Record<ChainId, Record<string, bigint>> = {
   linea: {
     'mendi-linea-ezeth': 3174775n, // 3174769n,
   },
+  optimism: {},
 };

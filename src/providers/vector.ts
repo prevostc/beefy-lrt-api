@@ -6,14 +6,11 @@ import { BaseProvider } from './base';
 import type { PlatformBalance } from '../platforms/types';
 
 const chainToToken: Partial<Record<ChainId, Address>> = {
-  ethereum: '0xbf5495Efe5DB9ce00f80364C8B423567e58d2110',
-  arbitrum: '0x2416092f143378750bb29b79eD961ab195CcEea5',
-  linea: '0x2416092f143378750bb29b79eD961ab195CcEea5',
-  base: '0x2416092f143378750bb29b79eD961ab195CcEea5',
+  ethereum: '0x38D64ce1Bdf1A9f24E0Ec469C9cAde61236fB4a0',
 };
 
-class RenzoProvider extends BaseProvider implements IProvider {
-  private readonly ezETH: Address;
+class VectorProvider extends BaseProvider implements IProvider {
+  private readonly vETH: Address;
 
   constructor(
     chainId: ChainId,
@@ -22,22 +19,22 @@ class RenzoProvider extends BaseProvider implements IProvider {
     vaults: Vault[],
     users: Address[]
   ) {
-    super('renzo', ['ezETH'], chainId, publicClient, block, vaults, users);
+    super('vector', ['vETH'], chainId, publicClient, block, vaults, users);
 
     const token = chainToToken[chainId];
     if (!token) {
       throw new Error(`${chainId} is not supported by ${this.id} provider`);
     }
-    this.ezETH = token;
+    this.vETH = token;
   }
 
   protected get token(): Address {
-    return this.ezETH;
+    return this.vETH;
   }
 
   protected filterPlatformBalance(balance: PlatformBalance): boolean {
-    return balance.token === this.ezETH && balance.balance > 0;
+    return balance.token === this.vETH && balance.balance > 0;
   }
 }
 
-export const Renzo = RenzoProvider satisfies IProviderConstructor<RenzoProvider>;
+export const Vector = VectorProvider satisfies IProviderConstructor<VectorProvider>;
