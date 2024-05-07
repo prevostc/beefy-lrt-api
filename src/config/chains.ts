@@ -1,5 +1,5 @@
 import type { Chain as ViemChain, MulticallBatchOptions } from 'viem';
-import { arbitrum, base, linea, mainnet, optimism, type Prettify } from 'viem/chains';
+import { arbitrum, base, bsc, linea, mainnet, optimism, type Prettify } from 'viem/chains';
 import { keyBy } from 'lodash';
 import { getRequiredStringEnv } from '../utils/env';
 import { keys } from '../utils/object';
@@ -59,6 +59,13 @@ export const chains = toChainMap([
     viem: optimism,
     rpc: getRequiredStringEnv('OPTIMISM_RPC'),
     providers: { kelp },
+  },
+  {
+    id: 'bsc',
+    name: 'BSC',
+    viem: bsc,
+    rpc: getRequiredStringEnv('BSC_RPC'),
+    providers: { etherfi },
   },
 ] as const satisfies ReadonlyArray<Chain>);
 

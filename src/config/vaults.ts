@@ -30,4 +30,5 @@ export const vaultInitBlockByChain: Record<ChainId, Record<string, bigint>> = {
     'mendi-linea-ezeth': 3174775n, // 3174769n,
   },
   optimism: {},
+  bsc: {},
 };
