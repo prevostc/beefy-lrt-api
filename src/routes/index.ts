@@ -32,7 +32,7 @@ export default async function (
     .get('/openapi.json', { config: { rateLimit: false } }, (_req, reply) => {
       reply.send(instance.swagger());
     })
-    .register(balancesV1, { prefix: '/v1/balances' })
+    .register(balancesV1, { prefix: '/v1_to_remove/balances' })
     .register(V2, { prefix: '/v2' });
   done();
 }

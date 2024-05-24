@@ -31,4 +31,5 @@ export const vaultInitBlockByChain: Record<ChainId, Record<string, bigint>> = {
   },
   optimism: {},
   bsc: {},
+  mode: {},
 };
