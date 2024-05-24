@@ -1,5 +1,5 @@
 import type { Chain as ViemChain, MulticallBatchOptions } from 'viem';
-import { arbitrum, base, bsc, linea, mainnet, optimism, type Prettify } from 'viem/chains';
+import { arbitrum, base, bsc, linea, mainnet, mode, optimism, type Prettify } from 'viem/chains';
 import { keyBy } from 'lodash';
 import { getRequiredStringEnv } from '../utils/env';
 import { keys } from '../utils/object';
@@ -20,7 +20,7 @@ function toChainMap<T extends ReadonlyArray<Chain>>(arr: T) {
 }
 
 const renzo = ['ezETH'];
-const etherfi = ['eETH', 'weETH'];
+const etherfi = ['eETH', 'weETH', 'weETH.mode'];
 const kelp = ['rsETH', 'wrsETH'];
 const vector = ['vETH'];
 
@@ -66,6 +66,13 @@ export const chains = toChainMap([
     viem: bsc,
     rpc: getRequiredStringEnv('BSC_RPC'),
     providers: { etherfi },
+  },
+  {
+    id: 'mode',
+    name: 'Mode',
+    viem: mode,
+    rpc: getRequiredStringEnv('MODE_RPC'),
+    providers: { etherfi, renzo },
   },
 ] as const satisfies ReadonlyArray<Chain>);
 
